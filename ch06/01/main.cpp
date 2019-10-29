@@ -9,8 +9,7 @@ int main(void)
 
     cout << "Enter letters (to stop, enter @): " << endl;
 
-    cin.get(ch);
-    while (ch != '@') {
+    while ((ch=cin.get()) != '@') {
         if (isdigit(ch)) {
             continue;
         } else if (islower(ch)) {
@@ -20,7 +19,6 @@ int main(void)
         } else {
             cout << ch;
         }
-        cin.get(ch);
     }
 
     return 0;
