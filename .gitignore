@@ -1,2 +1,6 @@
 main
 *.txt
+*.o
+cscope.out
+cscope.in.out
+cscope.po.out
