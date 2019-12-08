@@ -1,10 +1,10 @@
 CC = g++
-CFLAGS = -Wall -g
+CFLAGS = -Wall -g3
 
 main: usestock.o stock.o
 	$(CC) $(CFLAGS) $^ -o $@
 
-%o:%cpp
+.cpp.o:
 	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: clean
