@@ -63,8 +63,19 @@ void Stock::update(double price)
 
 void Stock::show(void)
 {
+    std::ios_base::fmtflags orig = std::cout.setf(std::ios_base::fixed, std::ios_base::floatfield);
+
+    /* 修改浮点数输出格式为#.### */
+    std::streamsize prec = std::cout.precision(3);
     std::cout << "Company: " << company
-        << " Shares: " << shares << std::endl
-        << "Share Price: $" << share_val
-        << "Total Worth: $" << total_val << std::endl;
+        << " Shares: " << shares << std::endl;
+    std::cout << "Share Price: $" << share_val;
+
+    /* 修改浮点数输出格式为#.## */
+    std::cout.precision(2);
+    std::cout << "Total Worth: $" << total_val << std::endl;
+
+    /* 恢复以前设置 */
+    std::cout.setf(orig, std::ios_base::floatfield);
+    std::cout.precision(prec);
 }
