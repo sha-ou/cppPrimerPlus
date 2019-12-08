@@ -1,6 +1,37 @@
 #include "stock.h"
 #include <iostream>
 
+Stock::Stock()
+{
+    std::cout << "Default constructor called" << std::endl;
+    company = "no name";
+    shares = 0;
+    share_val = 0.0;
+    total_val = 0.0;
+}
+
+Stock::Stock(const std::string &co, long n, double pr)
+{
+    std::cout << "Constructor using " << co << " callled" << std::endl;
+    company = co;
+
+    if (n < 0) {
+        std::cout << "Number of shares can't be negative; "
+            << company << " shares set to 0." << std::endl;
+        shares = 0;
+    } else {
+        shares = n;
+    }
+
+    share_val = pr;
+    set_tot();
+}
+
+Stock::~Stock()
+{
+    std::cout << "Bye " << company << std::endl;
+}
+
 void Stock::acquire(const std::string & co, long n, double pr)
 {
     /* 设置公司 */
@@ -73,7 +104,7 @@ void Stock::show(void)
 
     /* 修改浮点数输出格式为#.## */
     std::cout.precision(2);
-    std::cout << "Total Worth: $" << total_val << std::endl;
+    std::cout << "  Total Worth: $" << total_val << std::endl;
 
     /* 恢复以前设置 */
     std::cout.setf(orig, std::ios_base::floatfield);

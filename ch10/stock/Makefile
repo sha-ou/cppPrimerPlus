@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -Wall -g3
+CFLAGS = -Wall -g
 
 main: usestock.o stock.o
 	$(CC) $(CFLAGS) $^ -o $@
