@@ -23,8 +23,18 @@ int main(void)
     fixing.Show();
     cout << endl;
 
-    total = coding.Sum(fixing);
-    cout << "coding.Sum(fixing) = ";
+    total = coding + fixing;
+    cout << "coding + fixing = ";
+    total.Show();
+    cout << endl;
+
+    Time morefixing = Time(3, 28);
+    cout << "more fixing time = ";
+    morefixing.Show();
+    cout << endl;
+
+    total = morefixing.operator+(total);
+    cout << "morefixing.operator+(total) = ";
     total.Show();
     cout << endl;
 
