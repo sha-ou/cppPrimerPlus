@@ -1,6 +1,8 @@
 #ifndef __MYTIME_H__
 #define __MYTIME_H__
 
+#include <iostream>
+
 class Time {
     private:
         int m_hours;
@@ -14,7 +16,8 @@ class Time {
         Time operator+(const Time & t) const;
         Time operator-(const Time & t) const;
         Time operator*(double n) const;
-        void Show(void) const;
+        friend Time operator*(double n, const Time & t) { return t * n; }
+        friend std::ostream & operator<<(std::ostream & os, const Time & t);
 };
 
 #endif

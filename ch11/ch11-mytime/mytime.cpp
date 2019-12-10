@@ -61,9 +61,8 @@ Time Time::operator*(double n) const
     return result;
 }
 
-void Time::Show(void) const
+std::ostream & operator<<(std::ostream & os, const Time & t)
 {
-    using namespace std;
-
-    cout << m_hours << " hours, " << m_minutes << " minutes";
+    os << t.m_hours << " hours, " << t.m_minutes << " minutes";
+    return os;
 }
