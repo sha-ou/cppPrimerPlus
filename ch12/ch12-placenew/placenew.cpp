@@ -44,14 +44,21 @@ int main(void)
     pc2->show();
 
     Justtesting *pc3, *pc4;
-    pc3 = new (buff) Justtesting("Bad idea", 6);
+    pc3 = new (buff+sizeof(Justtesting)) Justtesting("Bad idea", 6);
     pc4 = new Justtesting("Heap2", 10);
+
+    cout << "Memory block address:" << endl;
+    cout << "\tbuff: " << (void *)buff <<endl;
+    cout << "\tpc3 : " << (void *)pc3 << endl;
+    cout << "\tpc4 : " << (void *)pc4 << endl;
+
     cout << "Memory contents:" << endl;
     cout << "\tpc3 : ";
     pc3->show();
     cout << "\tpc4 : ";
     pc4->show();
 
+    cout << "After new pc3" << endl;
     cout << "Memory contents:" << endl;
     cout << "\tpc1 : ";
     pc1->show();
@@ -60,6 +67,8 @@ int main(void)
 
     delete pc2;
     delete pc4;
+    pc1->~Justtesting();
+    pc3->~Justtesting();
     delete [] buff;
 
     cout << "Done" << endl;
