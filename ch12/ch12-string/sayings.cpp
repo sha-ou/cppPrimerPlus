@@ -1,4 +1,6 @@
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
 #include "string.h"
 
 const int ArSize = 10;
@@ -35,21 +37,27 @@ int main(void)
     if (total > 0) {
         cout << "Here are your sayings: " << endl;
         for (i=0; i<total; i++) {
-            cout << sayings[i][0] << ": " << sayings[i] << endl;
+            cout << sayings[i] << endl;
         }
-        int shortest = 0;
-        int first = 0;
+
+        String *shortest = &sayings[0];
+        String *first = &sayings[0];
         for (i=1; i<total; i++) {
-            if (sayings[i].length() < sayings[shortest].length()) {
-                shortest = i;
+            if (sayings[i].length() < shortest->length()) {
+                shortest = &sayings[i];
             }
-            if (sayings[first] < sayings[i]) {
-                first = i;
+            if (*first < sayings[i]) {
+                first = &sayings[i];
             }
         }
 
-        cout << "Shortest saying: " << endl << sayings[shortest] << endl;
-        cout << "First alphabetically: " << endl << sayings[first] << endl;
+        cout << "Shortest saying: " << endl << *shortest << endl;
+        cout << "First alphabetically: " << endl << *first << endl;
+
+        srand(time(0));
+        int choice = rand() % total;
+        String *favorite = new String(sayings[choice]);
+        cout << "My favorite saying: " << endl << *favorite << endl;
         cout << "This program used " << String::HowMany() << " String objects. Bye." << endl;
     } else {
         cout << "No Input! Bye." << endl;
