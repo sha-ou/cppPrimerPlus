@@ -29,7 +29,7 @@ class Queue {
         int m_items;
         const int m_qsize;
         Queue(const Queue & q) : m_qsize(0) {}
-        Queue & operator=(const Queue & q) {return *this}
+        Queue & operator=(const Queue & q) {return *this;}
     public:
         Queue(int qs = QSIZE);
         ~Queue(void);
