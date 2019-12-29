@@ -21,4 +21,20 @@ class TableTennisPlayer {
         }
 };
 
+class RatePlayer : public TableTennisPlayer {
+    private:
+        unsigned int m_rate;
+    public:
+        RatePlayer(unsigned int r=0, const string & fn="none",
+                const string & ln="none", bool ht=false);
+        RatePlayer(unsigned int r, const TableTennisPlayer & tp);
+        unsigned int Rating(void) const {
+            return m_rate;
+        }
+        void ResetRating(unsigned int r) {
+            m_rate = r;
+        }
+
+};
+
 #endif
