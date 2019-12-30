@@ -1,6 +1,8 @@
 #include <iostream>
 #include "tabtenn.h"
 
+void Show(const TableTennisPlayer & rt);
+
 int main(void)
 {
     using std::cout;
@@ -28,9 +30,24 @@ int main(void)
     cout << "; Rating: " << rplayer1.Rating() << endl;
 
     RatePlayer rplayer2(1212, player1);
+    Show(rplayer2);
     cout << "Name: ";
     rplayer2.Name();
     cout << "; Rating: " << rplayer2.Rating() << endl;
 
     return 0;
+}
+
+void Show(const TableTennisPlayer & rt)
+{
+    using std::cout;
+    using std::endl;
+
+    rt.Name();
+    cout << endl << "\tTable: ";
+    if (rt.HasTable()) {
+        cout << "Yes" << endl;
+    } else {
+        cout << "No" << endl;
+    }
 }
