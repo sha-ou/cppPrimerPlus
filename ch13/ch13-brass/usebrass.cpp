@@ -1,29 +1,63 @@
 #include <iostream>
+#include <string>
 #include "brass.h"
+
+const int CLIENTS = 4;
 
 int main()
 {
+    using std::cin;
     using std::cout;
     using std::endl;
 
-    Brass Piggy("Procelot Pigg", 381229, 4000.00);
-    BrassPlus Hoggy("Horatio Hogg", 382288, 3000.00);
-    Piggy.ViewAcct();
+    Brass * p_clients[CLIENTS];
+    std::string temp;
+    long tempnum;
+    double tempbal;
+    char kind;
+
+    for (int i=0; i<CLIENTS; i++) {
+        cout << "Enter client's name: ";
+        getline(cin, temp);
+        cout << "Enter client's account number: ";
+        cin >> tempnum;
+        cout << "Enter opening balance: $";
+        cin >> tempbal;
+        cout << "Enter 1 for Brass Account or 2 for BrassPlus Account: ";
+        while (cin >> kind && (kind != '1' && kind != '2')) {
+            cout << "Enter either 1 or 2: ";
+        }
+
+        if (kind == '1') {
+            p_clients[i] = new Brass(temp, tempnum, tempbal);
+        } else {
+            double tmax, trate;
+            cout << "Enter the overdraft limits: $";
+            cin >> tmax;
+            cout << "Enter the interest rate as a decimal fraction: ";
+            cin >> trate;
+            p_clients[i] = new BrassPlus(temp, tempnum, tempbal, tmax, trate);
+        }
+
+        while (cin.get() != '\n') {
+            continue;
+        }
+    }
+
     cout << endl;
-    Hoggy.ViewAcct();
-    cout << endl;
 
-    cout << "Depositing $1000 into the Hogg Account: " << endl;
-    Hoggy.Deposit(1000.00);
-    cout << "New balance: $" << Hoggy.Balance() << endl;
+    for (int i=0; i<CLIENTS; i++) {
+        p_clients[i]->ViewAcct(); // 通过指针调虚方法，调的是指向的对象的方法
+                                  // 通过指针调实方法，调的指针类型的方法
+        cout << endl;
+    }
 
-    cout << "Withdrawing $4200 from the Pigg Account: " << endl;
-    Piggy.Withdraw(4200.00);
-    cout << "Piggy account balance: $" << Piggy.Balance() << endl;
+    for (int i=0; i<CLIENTS; i++) {
+        delete p_clients[i];
+    }
 
-    cout << "Withdrawing $4200 from the Hogg Account: " << endl;
-    Hoggy.Withdraw(4200.00);
-    Hoggy.ViewAcct();
+    cout << "Done\n";
 
     return 0;
 }
+
